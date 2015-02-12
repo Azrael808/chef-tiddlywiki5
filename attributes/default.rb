@@ -1,4 +1,7 @@
 
+# User info
+default['tiddlywiki5']['user'] = 'tw5'
+
 # Path to install the TW5 application
 default['tiddlywiki5']['tw5_path'] = "/srv/tw5"
 
