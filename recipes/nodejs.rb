@@ -30,6 +30,7 @@ application "tiddlywiki5" do
   # Check if we want nginx deployed in front of TW5
   if node['tiddlywiki5']['nodejs']['nginx_proxy'] == true
     nginx_load_balancer do
+      hosts [ '127.0.0.1' ]
       template "load_balancer.conf.erb"
       server_name node['tiddlywiki5']['site_hostname']
       application_port node['tiddlywiki5']['tw5_port']
