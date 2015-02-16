@@ -7,6 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 
+# Ensure user/group exists
+include_recipe "tiddlywiki5::user"
+
 # Deploy TiddlyWiki from Github 
 application "tiddlywiki5" do
 
