@@ -14,7 +14,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "tiddlywiki5-berkshelf"
 
   # Set the version of chef to install using the vagrant-omnibus plugin
-  config.omnibus.chef_version = :latest
+  #config.omnibus.chef_version = :latest
+  # Forcing Chef version 11 due to imcompatibilities with Chef 12:
+  # https://github.com/poise/application_nginx/issues/20
+  config.omnibus.chef_version = "11.18.6"
 
   # Every Vagrant virtual environment requires a box to build off of.
   # If this value is a shorthand to a box in Vagrant Cloud then 
