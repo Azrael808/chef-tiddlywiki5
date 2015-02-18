@@ -8,7 +8,11 @@
 #
 
 # Ensure user/group exists
-include_recipe "tiddlywiki5::user"
+%w{ tiddlywiki5::user
+    nginx_auth_ldap }.each do |r|
+
+  include_recipe r
+end
 
 # Deploy TiddlyWiki from Github 
 application "tiddlywiki5" do
