@@ -9,7 +9,7 @@ default['tiddlywiki5']['nodejs']['ldap_auth'] = false
 default['tiddlywiki5']['nodejs']['ldap_basedn'] = "dc=example,dc=com"
 
 # Details for binding to the directory server.
-default['tiddlywiki5']['nodejs']['ldap_url'] = "ldap://ldap.example.com:389/dc=example,dc=com?sAMAccountName?sub?(objectClass=person)"
+default['tiddlywiki5']['nodejs']['ldap_url'] = "ldap://ldap.example.com:389/dc=example,dc=com?uid?sub?(objectClass=inetorgperson)"
 default['tiddlywiki5']['nodejs']['ldap_binddn'] = "uid=tiddlywiki,ou=Service Accounts,dc=example,dc=com"
 default['tiddlywiki5']['nodejs']['ldap_binddn_password'] = "changeme"
 
