@@ -8,10 +8,10 @@
 #
 
 # Ensure user/group exists
-%w{ tiddlywiki5::user
-    nginx_auth_ldap }.each do |r|
+include_recipe "tiddlywiki5::user"
 
-  include_recipe r
+if node['tiddlywiki5']['nodejs']['ldap_auth']
+  include_recipe "nginx_auth_ldap"
 end
 
 # Deploy TiddlyWiki from Github 
