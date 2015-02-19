@@ -7,15 +7,6 @@ upstream <%= @resource.application.name %> {
   server 127.0.0.1:<%= @resource.application_port %>;
 }
 
-<%- if node['tiddlywiki5']['nodejs']['ldap_auth'] == true -%>
-ldap_server dirsrv {
-  url <%= node['tiddlywiki5']['nodejs']['ldap_url'] %>;
-  binddn "<%= node['tiddlywiki5']['nodejs']['ldap_binddn'] %>";
-  binddn_passwd "<%= node['tiddlywiki5']['nodejs']['ldap_binddn_password'] %>";
-  require valid_user;
-}
-<%- end -%>
-
 server {
   listen <%= @resource.port %>;
   server_name <%= @resource.server_name.is_a?(Array) ? @resource.server_name.join(' ') : @resource.server_name %>;
