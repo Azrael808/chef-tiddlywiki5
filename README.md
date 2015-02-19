@@ -91,7 +91,7 @@ https://github.com/poise/application_nginx/issues/20
 
 ## Usage
 
-If you have Vagrant installed and configured locally, you should be able to run `vagrant up` to get a working
+If you have Vagrant _and_ the ChefDK installed and configured locally, you should be able to run `vagrant up` to get a working
 installation. Override the attributes above to tweak the deployment.
 
 To include this cookbook in a Chef run, simply add the `tiddlywiki5::default` recipe to the run list.
