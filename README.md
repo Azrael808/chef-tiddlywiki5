@@ -9,6 +9,9 @@ Currently tested on the following distros:
 * CentOS (6.5)
 * Ubuntu (14.04)
 
+Not currently compatible with Chef 12, because of it's dependency on the application_nginx cookbook:
+https://github.com/poise/application_nginx/issues/20
+
 ## Attributes
 
 <table>
