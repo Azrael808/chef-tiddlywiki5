@@ -91,8 +91,35 @@ https://github.com/poise/application_nginx/issues/20
 
 ## Usage
 
-If you have Vagrant _and_ the ChefDK installed and configured locally, you should be able to run `vagrant up` to get a working
-installation. Override the attributes above to tweak the deployment.
+### Local Testing
+
+To create a VM locally that contains all the components currently made available by this cookbook (NodeJS TW5 instance, nginx
+proxy that authenticates with 389 directory server), please follow these steps:
+
+1. Download and install VirtualBox for your platform: https://www.virtualbox.org/wiki/Downloads
+1. Download and install Vagrant for your platform: http://www.vagrantup.com/downloads.html
+1. Download and install the ChefDK for your platform: https://downloads.chef.io/chef-dk/
+1. Perform any necessary post-install configuration to ensure ChefDK's binaries are available in your path.
+1. Install the `vagrant-berkshelf` plugin: `vagrant plugin install vagrant-berkshelf`
+1. Install the `vagrant-omnibus` plugin: `vagrant plugin install vagrant-omnibus`
+1. Clone this repo (if you haven't already) and `cd` to it's root.
+1. Run `vagrant up`
+
+After a reasonable amount of time (and output), the Vagrant command should exit successfully, which should leave you with a machine
+with the following port forwards configured:
+
+* 8080 (Host) -> 80 (VM) - for connecting to Nginx / TW5.
+* 3389 (Host) -> 389 (VM) - for connecting to the directory server (you'll need to use the credentials specified in the
+`default['tiddlywiki5']['dirsrv_credentials'] attribute, which you can find in `attributes/directory_services.rb`).
+
+A final step to allow nginx to map your HTTP requests to the appropriate vhost; add the following line to your `/etc/hosts` file:
+
+```
+127.0.0.1      tiddlywiki5.example.com
+```
+
+
+### Chef Server / Solo
 
 To include this cookbook in a Chef run, simply add the `tiddlywiki5::default` recipe to the run list.
 
