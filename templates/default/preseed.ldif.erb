@@ -1,0 +1,63 @@
+version: 1
+
+dn: <%= node['tiddlywiki5']['suffix'] %>
+objectClass: top
+objectClass: domain
+dc: <%= node['tiddlywiki5']['suffix'].split(",").first.split("=").last %>
+aci: (targetattr!="userPassword")(version 3.0; acl "Enable anonymous access"
+ ; allow (read, search, compare) userdn="ldap:///anyone";)
+aci: (targetattr="carLicense || description || displayName || facsimileTelep
+ honeNumber || homePhone || homePostalAddress || initials || jpegPhoto || la
+ beledURI || mail || mobile || pager || photo || postOfficeBox || postalAddr
+ ess || postalCode || preferredDeliveryMethod || preferredLanguage || regist
+ eredAddress || roomNumber || secretary || seeAlso || st || street || teleph
+ oneNumber || telexNumber || title || userCertificate || userPassword || use
+ rSMIMECertificate || x500UniqueIdentifier")(version 3.0; acl "Enable self w
+ rite for common attributes"; allow (write) userdn="ldap:///self";)
+aci: (targetattr="*")(version 3.0; acl "Configuration Administrators Group";
+  allow (all) groupdn="ldap:///cn=Configuration Administrators,ou=Groups,ou=
+ TopologyManagement,o=NetscapeRoot";)
+aci: (targetattr="*")(version 3.0; acl "Configuration Administrator"; allow 
+ (all) userdn="ldap:///uid=admin,ou=Administrators,ou=TopologyManagement,o=N
+ etscapeRoot";)
+aci: (targetattr = "*")(version 3.0; acl "SIE Group"; allow (all) groupdn = 
+ "ldap:///cn=slapd-platform_master,cn=389 Directory Server,cn=Server Group,c
+ n=<%= node['tiddlywiki5']['master-ldap'] %>,ou=<%= node['tiddlywiki5']['domain'] %>,o=NetscapeRoot";)
+
+dn: ou=Users,<%= node['tiddlywiki5']['suffix'] %>
+objectClass: organizationalUnit
+objectClass: top
+ou: Users
+
+dn: ou=Groups,<%= node['tiddlywiki5']['suffix'] %>
+objectClass: organizationalUnit
+objectClass: top
+ou: Groups
+
+dn: ou=Service Accounts,<%= node['tiddlywiki5']['suffix'] %>
+objectClass: organizationalUnit
+objectClass: top
+ou: Service Accounts
+
+dn: uid=tiddlywiki,ou=Service Accounts,<%= node['tiddlywiki5']['suffix'] %>
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: TiddlyWiki User
+sn: User
+uid: tiddlywiki
+userPassword:: e3NzaGF9OG5hai9lZkovR3g4QzBaYjd1MkhkK3VQY0Z0SDFBekt4SjZWNUE9P
+ Q==
+
+dn: uid=testuser,ou=Users,<%= node['tiddlywiki5']['suffix'] %>
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: Test User
+sn: User
+uid: testuser
+userPassword:: e3NzaGF9OFNFdU91SUI3ek5BSW5iQWVEUnIzWlZJbE1tOXNENjhEQkJoSlE9P
+ Q==
+
