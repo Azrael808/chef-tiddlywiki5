@@ -8,7 +8,9 @@ version          '0.3.0'
 %w{ application
     application_nginx
     application_nodejs
-    nginx_auth_ldap }.each do |d|
+    couchdb
+    nginx_auth_ldap
+    nodejs }.each do |d|
 
   depends          d
 end
